@@ -1,0 +1,40 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.ring {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  animation: ring 2s linear infinite;
+}
+
+.ring::before {
+  position: absolute;
+  content: "";
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+
+@keyframes ring {
+  0% {
+    transform: rotate(0deg);
+    box-shadow: 1px 5px 2px var(--purple-color);
+  }
+  50% {
+    transform: rotate(180deg);
+    box-shadow: 1px 5px 2px var(--turqouise-color);
+  }
+  100% {
+    transform: rotate(360deg);
+    box-shadow: 1px 5px 2px var(--green-color);
+  }
+}
