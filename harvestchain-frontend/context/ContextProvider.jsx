@@ -14,9 +14,9 @@ export function ContextProvider({ children }) {
     const web3Provider = new providers.Web3Provider(provider);
 
     const { chainId } = await web3Provider.getNetwork();
-    if (chainId !== 7701) {
-      alert("Change the network to Canto");
-      throw new Error("Change the network to Canto");
+    if (chainId !== 97) {
+      alert("Change the network to BNB Chain");
+      throw new Error("Change the network to BNB Chain");
     }
 
     if (needSigner) {
