@@ -13,14 +13,14 @@ export default function Navbar() {
         <Link href="/">HarvestChain</Link>
       </h1>
       <ul className="flex items-center gap-x-4">
-        <li className={`${hideRegister}  hover:text-yellowgreen`}>
-          <Link href="">Investors</Link>
+        <li className={`${hideRegister} hover:text-yellowgreen`}>
+          <Link href="/investor">Investors</Link>
         </li>
         <li>
-          <Link href="">Profile</Link>
+          <Link href="/profile">Profile</Link>
         </li>
         <li className={`${hideRegister} hover:text-yellowgreen`}>
-          <Link href="">Growers</Link>
+          <Link href="/grower">Growers</Link>
         </li>
       </ul>
       <button
