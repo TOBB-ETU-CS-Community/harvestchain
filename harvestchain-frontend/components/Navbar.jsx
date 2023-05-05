@@ -7,6 +7,11 @@ export default function Navbar() {
 
   const hideRegister = walletConnected ? "hidden" : "";
 
+  const walletBg = walletConnected ? "bg-asparagus" : "";
+  const walletBorder = walletConnected
+    ? "border-asparagus"
+    : "border-aquamarine";
+
   return (
     <div className="h-16 flex justify-around items-center bg-bistre">
       <h1 className="text-3xl">
@@ -24,7 +29,7 @@ export default function Navbar() {
         </li>
       </ul>
       <button
-        className="p-1.5 border-solid border border-aquamarine rounded-md hover:bg-asparagus hover:border-asparagus"
+        className={`p-1.5 ${walletBg} border-solid border ${walletBorder} rounded-md hover:bg-asparagus hover:border-asparagus`}
         onClick={connectWallet}>
         {walletConnected
           ? `Wallet Connected: ${address.slice(0, 5)}...${address.slice(-4)}`
