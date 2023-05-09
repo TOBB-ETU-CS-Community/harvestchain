@@ -4,14 +4,14 @@ import Link from "next/link";
 
 export default function Card() {
   const productList = cardDetails.map((card) => (
-    <Link href="" key={card.id}>
+    <Link href={card.id} key={card.id}>
       <div className="w-48 h-48 overflow-hidden">
         <Image
           src="/ejder-meyvesi.jpg"
           alt="Fruit"
           width={200}
           height={200}
-          className="transform transition duration-300 hover:scale-110"
+          className="rounded-md transform transition duration-300 hover:scale-105"
         />
       </div>
       <h1>{card.grower}</h1>

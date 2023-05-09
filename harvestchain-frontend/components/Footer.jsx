@@ -8,7 +8,7 @@ export default function Footer() {
         <span>
           <Image src="/logo.png" alt="Logo" width={25} height={25} />
         </span>{" "}
-        &#10084; Made By Blockchain Club of TOBB Ecoonomics and Technology
+        &#10084; Made By Blockchain Club of TOBB Economics and Technology
       </h3>
     </footer>
   );
