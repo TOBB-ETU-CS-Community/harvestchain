@@ -6,10 +6,10 @@ export default function ProposalDetails() {
   const router = useRouter();
   const proposalId = router.query.proposalId;
 
-  const productDetail = cardDetails.map((card) => (
-    <div key={card.id} className="flex justify-center items-center">
-      {card.id === proposalId && (
-        <div className="flex justify-evenly">
+  const productDetail = cardDetails.map((card) => {
+    if (card.id === proposalId) {
+      return (
+        <div className="flex items-center gap-24" key={card.id}>
           <Image
             src="/ejder-meyvesi.jpg"
             alt="Fruit"
@@ -21,9 +21,19 @@ export default function ProposalDetails() {
             <p>{card.capital}</p>
           </div>
         </div>
-      )}
-    </div>
-  ));
+      );
+    }
+    return null;
+  });
 
-  return <h1>{productDetail}</h1>;
+  return (
+    <div className="flex justify-center items-center">
+      <div className="mt-24 overflow-hidden">
+        {productDetail}
+        <button className="mt-12 px-12 py-2 bg-asparagus text-lg rounded-3xl float-right hover:">
+          Invest
+        </button>
+      </div>
+    </div>
+  );
 }
