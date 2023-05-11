@@ -5,6 +5,7 @@
 body {
   background-color: #613a3a;
   color: #ebebeb;
+  height: 100%;
 }
 
 ::-webkit-scrollbar {

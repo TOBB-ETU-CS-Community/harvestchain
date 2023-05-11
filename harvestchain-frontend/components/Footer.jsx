@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="flex-[0_0_50px] mt-24">
+    <footer className="mt-24">
       <div className="w-full h-0.5 bg-gradient-to-r from-yellowgreen to-screamingreen"></div>
       <h3 className="flex justify-center py-6 bg-bistre">
         <span>
