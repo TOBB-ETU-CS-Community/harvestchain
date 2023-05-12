@@ -37,7 +37,7 @@ export default function Navbar() {
             : "Connect Wallet"}
         </button>
       </nav>
-      <div className="w-full h-0.5 bg-gradient-to-r from-yellowgreen to-screamingreen"></div>
+      <div className="w-full h-px bg-gradient-to-r from-yellowgreen to-screamingreen"></div>
     </>
   );
 }

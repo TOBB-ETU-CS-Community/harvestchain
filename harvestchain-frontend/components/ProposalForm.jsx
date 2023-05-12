@@ -17,7 +17,7 @@ export default function ProposalForm() {
         .positive(),
     }),
     onSubmit: (values) => {
-      handleCreateProposal(values.description, values.requestedContribution);
+      alert(JSON.stringify(values, null, 2));
     },
   });
 
