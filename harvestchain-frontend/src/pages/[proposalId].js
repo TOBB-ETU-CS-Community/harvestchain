@@ -30,7 +30,7 @@ export default function ProposalDetails() {
     <div className="flex justify-center items-center">
       <div className="mt-24 overflow-hidden">
         {productDetail}
-        <button className="mt-12 px-12 py-2 bg-asparagus text-lg rounded-3xl float-right hover:">
+        <button className="mt-12 px-12 py-2 bg-asparagus text-lg rounded-3xl float-right hover:hovercolor">
           Invest
         </button>
       </div>

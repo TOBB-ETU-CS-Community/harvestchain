@@ -22,9 +22,11 @@ export default function ProposalForm() {
   });
 
   return (
-    <form className="" onSubmit={formik.handleSubmit}>
-      <div className="flex flex-col items-center">
-        <div className="mb-6">
+    <form
+      className="border-2 border-solid border-asparagus rounded-lg"
+      onSubmit={formik.handleSubmit}>
+      <div className="flex flex-col p-8">
+        <div className="mb-6 flex flex-col">
           <label htmlFor="description">
             Please enter the description of your project to get funded
           </label>
@@ -34,16 +36,16 @@ export default function ProposalForm() {
             name="description"
             onChange={formik.handleChange}
             value={formik.values.description}
-            className="w-1/2 h-8 mt-2 pl-2 text-black border-solid border-2 border-orange-600 rounded-md focus:outline-0"
+            className="w-3/4 h-8 mt-2 pl-2 text-black rounded-md focus:outline-0"
           />
           {formik.touched.description && formik.errors.description ? (
-            <div className="w-1/2 mt-2 bg-red-600 rounded-lg text-white">
+            <div className="w-2/3 mt-2 bg-errorred rounded-lg">
               <span className="p-2">{formik.errors.description}</span>
             </div>
           ) : null}
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 flex flex-col">
           <label htmlFor="requestedContribution">
             Please enter the requested amount for your project
           </label>
@@ -53,16 +55,16 @@ export default function ProposalForm() {
             name="requestedContribution"
             onChange={formik.handleChange}
             value={formik.values.requestedContribution}
-            className="w-1/2 h-8 mt-2 pl-2 text-black border-solid border-2 border-orange-600 rounded-md focus:outline-0"
+            className="w-3/4 h-8 mt-2 pl-2 text-black rounded-md focus:outline-0"
           />
           {formik.touched.requestedContribution &&
           formik.errors.requestedContribution ? (
-            <div className="w-1/2 mt-2 bg-red-600 rounded-lg text-white">
+            <div className="w-2/3 mt-2 bg-errorred rounded-lg">
               <span className="p-2">{formik.errors.requestedContribution}</span>
             </div>
           ) : null}
         </div>
-        <button className="w-1/4 mt-4 py-1.5 border-solid border border-violet-800 rounded-lg hover:bg-gradient-to-br from-orange-600 to-violet-700 hover:text-white">
+        <button className="w-36 mt-4 mx-auto py-1.5 bg-asparagus rounded-3xl hover:bg-hovercolor">
           Submit
         </button>
       </div>
