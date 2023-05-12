@@ -15,10 +15,10 @@ export default function Card() {
         />
       </div>
       <h1>{card.grower}</h1>
-      <p>{card.details}</p>
+      <p>{card.area}</p>
       <p>{card.capital}</p>
-      <p>{card.expectedReturn}</p>
-      <p>{card.endTime}</p>
+      <p>{card.estimatedReturn}</p>
+      <p>{card.duration}</p>
     </Link>
   ));
 
