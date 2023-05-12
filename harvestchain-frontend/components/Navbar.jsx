@@ -6,7 +6,6 @@ export default function Navbar() {
   const { address, connectWallet, walletConnected } = useContext(ContextAPI);
 
   const hideRegister = walletConnected ? "hidden" : "";
-
   const walletBg = walletConnected ? "bg-asparagus" : "";
   const walletBorder = walletConnected
     ? "border-asparagus"
@@ -22,7 +21,10 @@ export default function Navbar() {
           <li className={`${hideRegister} hover:text-yellowgreen`}>
             <Link href="/investor">Investors</Link>
           </li>
-          <li>
+          <li
+            className={`${
+              walletConnected ? "" : "hidden"
+            } hover:text-yellowgreen`}>
             <Link href="/profile">Profile</Link>
           </li>
           <li className={`${hideRegister} hover:text-yellowgreen`}>
