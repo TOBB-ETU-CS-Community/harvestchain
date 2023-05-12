@@ -55,7 +55,9 @@ export default function ProposalDetails() {
             className="mb-4 pl-2 h-8 rounded-lg text-black focus:outline-0 placeholder:italic"
             placeholder="Enter the amount..."
             type="number"></input>
-          <button className="px-12 py-2 bg-asparagus text-lg rounded-3xl hover:bg-hovercolor">
+          <button
+            className="px-12 py-2 bg-asparagus text-lg rounded-3xl hover:bg-hovercolor"
+            type="submit">
             Invest
           </button>
         </div>

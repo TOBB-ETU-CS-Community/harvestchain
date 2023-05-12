@@ -4,17 +4,19 @@ import { object, string, number } from "yup";
 export default function ProposalForm() {
   const formik = useFormik({
     initialValues: {
-      description: "",
-      requestedContribution: "",
+      productName: "",
+      area: "",
+      duration: "",
+      estimatedRevenue: "",
     },
     validationSchema: object({
-      description: string()
-        .min(10, "Must be at least 10 characters")
+      productName: string()
+        .min(2, "Must be at least 10 characters")
         .max(100, "Must be 100 character or less!")
         .required("This field is required!"),
-      requestedContribution: number()
-        .required("This field is required!")
-        .positive(),
+      area: number().required("This field is required!").positive(),
+      duration: number().required("This field is required!").positive(),
+      estimatedRevenue: number().required("This field is required!").positive(),
     }),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
@@ -25,46 +27,82 @@ export default function ProposalForm() {
     <form
       className="border-2 border-solid border-asparagus rounded-lg"
       onSubmit={formik.handleSubmit}>
-      <div className="flex flex-col p-8">
+      <div className="flex flex-col py-8 px-16">
         <div className="mb-6 flex flex-col">
-          <label htmlFor="description">
-            Please enter the description of your project to get funded
-          </label>
+          <label htmlFor="productName">Please enter the product name</label>
           <input
             type="text"
-            id="description"
-            name="description"
+            id="productName"
+            name="productName"
             onChange={formik.handleChange}
-            value={formik.values.description}
+            value={formik.values.productName}
             className="w-3/4 h-8 mt-2 pl-2 text-black rounded-md focus:outline-0"
           />
-          {formik.touched.description && formik.errors.description ? (
+          {formik.touched.productName && formik.errors.productName ? (
             <div className="w-2/3 mt-2 bg-errorred rounded-lg">
-              <span className="p-2">{formik.errors.description}</span>
+              <span className="p-2">{formik.errors.productName}</span>
             </div>
           ) : null}
         </div>
 
         <div className="mb-6 flex flex-col">
-          <label htmlFor="requestedContribution">
-            Please enter the requested amount for your project
-          </label>
+          <label htmlFor="area">Please enter the area of the product</label>
           <input
             type="number"
-            id="requestedContribution"
-            name="requestedContribution"
+            id="area"
+            name="area"
             onChange={formik.handleChange}
-            value={formik.values.requestedContribution}
+            value={formik.values.area}
             className="w-3/4 h-8 mt-2 pl-2 text-black rounded-md focus:outline-0"
           />
-          {formik.touched.requestedContribution &&
-          formik.errors.requestedContribution ? (
+          {formik.touched.area && formik.errors.area ? (
             <div className="w-2/3 mt-2 bg-errorred rounded-lg">
-              <span className="p-2">{formik.errors.requestedContribution}</span>
+              <span className="p-2">{formik.errors.area}</span>
             </div>
           ) : null}
         </div>
-        <button className="w-36 mt-4 mx-auto py-1.5 bg-asparagus rounded-3xl hover:bg-hovercolor">
+
+        <div className="mb-6 flex flex-col">
+          <label htmlFor="duration">
+            Please enter the duration of the product
+          </label>
+          <input
+            type="number"
+            id="duration"
+            name="duration"
+            onChange={formik.handleChange}
+            value={formik.values.duration}
+            className="w-3/4 h-8 mt-2 pl-2 text-black rounded-md focus:outline-0"
+          />
+          {formik.touched.duration && formik.errors.duration ? (
+            <div className="w-2/3 mt-2 bg-errorred rounded-lg">
+              <span className="p-2">{formik.errors.duration}</span>
+            </div>
+          ) : null}
+        </div>
+
+        <div className="mb-6 flex flex-col">
+          <label htmlFor="estimatedRevenue">
+            Please enter the estimated revenue of the product
+          </label>
+          <input
+            type="number"
+            id="estimatedRevenue"
+            name="estimatedRevenue"
+            onChange={formik.handleChange}
+            value={formik.values.estimatedRevenue}
+            className="w-3/4 h-8 mt-2 pl-2 text-black rounded-md focus:outline-0"
+          />
+          {formik.touched.estimatedRevenue && formik.errors.estimatedRevenue ? (
+            <div className="w-2/3 mt-2 bg-errorred rounded-lg">
+              <span className="p-2">{formik.errors.estimatedRevenue}</span>
+            </div>
+          ) : null}
+        </div>
+
+        <button
+          className="w-36 mt-4 mx-auto py-1.5 bg-asparagus rounded-3xl hover:bg-hovercolor"
+          type="submit">
           Submit
         </button>
       </div>
