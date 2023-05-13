@@ -1,12 +1,11 @@
 import { useFormik } from "formik";
 import { object, string, number } from "yup";
 
-export default function ProposalForm() {
+export default function ProposalForm({ handleProposalForm }) {
   const formik = useFormik({
     initialValues: {
       productName: "",
       area: "",
-      duration: "",
       estimatedRevenue: "",
     },
     validationSchema: object({
@@ -15,11 +14,14 @@ export default function ProposalForm() {
         .max(100, "Must be 100 character or less!")
         .required("This field is required!"),
       area: number().required("This field is required!").positive(),
-      duration: number().required("This field is required!").positive(),
       estimatedRevenue: number().required("This field is required!").positive(),
     }),
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      handleProposalForm(
+        values.productName,
+        values.area,
+        values.estimatedRevenue
+      );
     },
   });
 
@@ -58,25 +60,6 @@ export default function ProposalForm() {
           {formik.touched.area && formik.errors.area ? (
             <div className="w-2/3 mt-2 bg-errorred rounded-lg">
               <span className="p-2">{formik.errors.area}</span>
-            </div>
-          ) : null}
-        </div>
-
-        <div className="mb-6 flex flex-col">
-          <label htmlFor="duration">
-            Please enter the duration of the product
-          </label>
-          <input
-            type="number"
-            id="duration"
-            name="duration"
-            onChange={formik.handleChange}
-            value={formik.values.duration}
-            className="w-3/4 h-8 mt-2 pl-2 text-black rounded-md focus:outline-0"
-          />
-          {formik.touched.duration && formik.errors.duration ? (
-            <div className="w-2/3 mt-2 bg-errorred rounded-lg">
-              <span className="p-2">{formik.errors.duration}</span>
             </div>
           ) : null}
         </div>

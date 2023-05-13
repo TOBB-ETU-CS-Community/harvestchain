@@ -1,5 +1,11 @@
 import { createContext, useRef, useState, useEffect } from "react";
 import { Contract, providers } from "ethers";
+import {
+  GROWER_CONTRACT_ADDRESS,
+  INVESTOR_CONTRACT_ADDRESS,
+  GROWER_CONTRACT_ABI,
+  INVESTOR_CONTRACT_ABI,
+} from "../constants";
 import Web3Modal from "web3modal";
 
 export const ContextAPI = createContext();
@@ -32,21 +38,21 @@ export function ContextProvider({ children }) {
     setAddress(initialAddress);
   };
 
-  // const insuranceContractInstance = (providerOrSigner) => {
-  //   return new Contract(
-  //     INSURANCE_CONTRACT_ADDRESS,
-  //     INSURANCE_CONTRACT_ABI,
-  //     providerOrSigner
-  //   );
-  // };
+  const growerContractInstance = (providerOrSigner) => {
+    return new Contract(
+      GROWER_CONTRACT_ADDRESS,
+      GROWER_CONTRACT_ABI,
+      providerOrSigner
+    );
+  };
 
-  // const managementContractInstance = (providerOrSigner) => {
-  //   return new Contract(
-  //     MANAGEMENT_CONTRACT_ADDRESS,
-  //     MANAGEMENT_CONTRACT_ABI,
-  //     providerOrSigner
-  //   );
-  // };
+  const investorContractInstance = (providerOrSigner) => {
+    return new Contract(
+      INVESTOR_CONTRACT_ADDRESS,
+      INVESTOR_CONTRACT_ABI,
+      providerOrSigner
+    );
+  };
 
   const connectWallet = async () => {
     try {
@@ -76,6 +82,8 @@ export function ContextProvider({ children }) {
         address,
         connectWallet,
         getProviderOrSigner,
+        growerContractInstance,
+        investorContractInstance,
       }}>
       {children}
     </ContextAPI.Provider>
