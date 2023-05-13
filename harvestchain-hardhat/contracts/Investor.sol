@@ -33,7 +33,7 @@ contract Investor is ReentrancyGuard {
         Investors storage investor = investors[msg.sender];
         uint256 amountWithDecimals = _amount * 10 ** 18;
         require(amountWithDecimals == msg.value, "Wrong amount");
-        investor.amount = amountWithDecimals;
+        investor.amount += amountWithDecimals;
     }
 
     function sendPayment(uint256 _amount) public payable {
@@ -45,7 +45,7 @@ contract Investor is ReentrancyGuard {
         uint256 amountWithDecimals = _amount * 10 ** 18;
         require(amountWithDecimals == msg.value, "Wrong amount");
         investor.amount = 0;
-        (bool ok, ) = msg.sender.call{value: msg.value}("");
+        (bool ok, ) = msg.sender.call{value: amountWithDecimals}("");
         require(ok);
     }
 
