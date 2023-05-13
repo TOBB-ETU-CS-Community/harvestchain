@@ -8,14 +8,13 @@ contract Investor is ReentrancyGuard {
     struct Investors {
         address client;
         uint amount;
-        uint balance;
         string userName;
     }
 
     mapping(address => Investors) public investors;
 
-    constructor() {
-        growerContract = address(0);
+    constructor(address _growerContract) {
+        growerContract = _growerContract;
     }
 
     function getUserName(string memory _userName) public {
@@ -27,24 +26,26 @@ contract Investor is ReentrancyGuard {
         Investors storage investor = investors[msg.sender];
         investor.userName = _userName;
         investor.client = msg.sender;
-        investor.balance = _getInvestorBalance();
     }
 
-    function takePayment() public payable {
+    function takePayment(uint256 _amount) public payable {
         //get payment from investor
         Investors storage investor = investors[msg.sender];
-        investor.amount = msg.value;
+        uint256 amountWithDecimals = _amount * 10 ** 18;
+        require(amountWithDecimals == msg.value, "Wrong amount");
+        investor.amount = amountWithDecimals;
     }
 
-    function sendPayment() public payable nonReentrant {
+    function sendPayment(uint256 _amount) public payable {
         Investors storage investor = investors[msg.sender];
         require(
             investor.client == msg.sender,
             "You are not allowed to take any token"
         );
-        uint _amount = investor.amount;
+        uint256 amountWithDecimals = _amount * 10 ** 18;
+        require(amountWithDecimals == msg.value, "Wrong amount");
         investor.amount = 0;
-        (bool ok, ) = msg.sender.call{value: _amount}(" ");
+        (bool ok, ) = msg.sender.call{value: msg.value}("");
         require(ok);
     }
 
@@ -54,15 +55,11 @@ contract Investor is ReentrancyGuard {
             "You are not allowed"
         );
         amount = msg.value;
-        (bool ok, ) = msg.sender.call{value: amount}("");
+        (bool ok, ) = growerContract.call{value: amount}("");
         require(ok);
     }
 
     function getContractBalance() public view returns (uint) {
         return address(this).balance;
-    }
-
-    function _getInvestorBalance() internal view returns (uint) {
-        return address(msg.sender).balance;
     }
 }
