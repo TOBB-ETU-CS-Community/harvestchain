@@ -147,7 +147,7 @@ contract ManufacturerRegistry {
         returns (string memory, uint256, uint256, uint256, uint256)
     {
         require(
-            _advertisementId > 0 && _advertisementId <= advertisementId,
+            _advertisementId <= advertisementId,
             "Invalid advertisement ID"
         );
         Advertisement storage advertisement = manufacturerAdvertisements[
