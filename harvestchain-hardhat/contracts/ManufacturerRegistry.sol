@@ -16,12 +16,14 @@ contract ManufacturerRegistry {
         uint256 duration;
         uint256 estimatedRevenue;
         uint256 creationDate;
+        uint256 endDate;
+        address creator;
     }
 
     mapping(address => Manufacturer) public manufacturers;
     mapping(uint256 => Advertisement) public manufacturerAdvertisements;
 
-    uint256 public advertisementId;
+    uint256 public advertisementId = 1;
 
     event ManufacturerRegistered(
         address indexed manufacturerAddress,
@@ -44,7 +46,9 @@ contract ManufacturerRegistry {
         uint256 area,
         uint256 duration,
         uint256 estimatedRevenue,
-        uint256 createdDate
+        uint256 createdDate,
+        uint256 endDate,
+        address creator
     );
     event AdvertisementRetrieved(
         address indexed manufacturerAddress,
@@ -107,7 +111,8 @@ contract ManufacturerRegistry {
     function createAdvertisement(
         string calldata productName,
         uint256 area,
-        uint256 estimatedRevenue
+        uint256 estimatedRevenue,
+        uint256 endDate
     ) external returns (uint256) {
         require(bytes(productName).length > 0, "Product name is required");
 
@@ -124,6 +129,8 @@ contract ManufacturerRegistry {
         advertisement.area = area;
         advertisement.estimatedRevenue = estimatedRevenue;
         advertisement.duration = block.timestamp + 1 minutes;
+        advertisement.endDate = endDate;
+        advertisement.creator = msg.sender;
 
         emit AdvertisementCreated(
             msg.sender,
@@ -132,7 +139,9 @@ contract ManufacturerRegistry {
             area,
             advertisement.duration,
             estimatedRevenue,
-            block.timestamp
+            block.timestamp,
+            endDate,
+            msg.sender
         );
 
         advertisementId++;
@@ -144,10 +153,10 @@ contract ManufacturerRegistry {
     )
         external
         view
-        returns (string memory, uint256, uint256, uint256, uint256)
+        returns (string memory, uint256, uint256, uint256, uint256, address)
     {
         require(
-            _advertisementId <= advertisementId,
+            _advertisementId > 0 && _advertisementId <= advertisementId,
             "Invalid advertisement ID"
         );
         Advertisement storage advertisement = manufacturerAdvertisements[
@@ -158,7 +167,8 @@ contract ManufacturerRegistry {
             advertisement.area,
             advertisement.duration,
             advertisement.estimatedRevenue,
-            advertisement.creationDate
+            advertisement.endDate,
+            advertisement.creator
         );
     }
 
