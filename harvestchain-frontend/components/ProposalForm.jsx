@@ -10,8 +10,8 @@ export default function ProposalForm({ handleProposalForm }) {
     },
     validationSchema: object({
       productName: string()
-        .min(2, "Must be at least 10 characters")
-        .max(100, "Must be 100 character or less!")
+        .min(2, "Must be at least 2 characters")
+        .max(15, "Must be 15 character or less!")
         .required("This field is required!"),
       area: number().required("This field is required!").positive(),
       estimatedRevenue: number().required("This field is required!").positive(),

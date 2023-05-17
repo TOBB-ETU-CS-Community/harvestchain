@@ -12,13 +12,12 @@ export default function Card() {
     try {
       const provider = await getProviderOrSigner();
       const contract = await growerContractInstance(provider);
-      let i = 0;
+      let i = 1;
       let done = false;
       setProposals([]);
       do {
         try {
           const oneProposal = await contract.manufacturerAdvertisements(i);
-          console.log(oneProposal);
           setProposals((props) => [...props, oneProposal]);
           i++;
         } catch (error) {

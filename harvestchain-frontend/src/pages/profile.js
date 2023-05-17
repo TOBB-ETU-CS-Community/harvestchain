@@ -65,10 +65,6 @@ export default function Profile() {
     }
   };
 
-  // if (loading) {
-  //   return <Loader />;
-  // }
-
   useEffect(() => {
     getBalance();
     growerBalanceOnContract();
@@ -84,7 +80,7 @@ export default function Profile() {
           </p>
           <div className="flex flex-col mt-12">
             <p className="mb-4 text-lg">
-              Your Balance On Contract: {growerContractBalance}
+              Your Balance On Contract: {growerContractBalance} BNB
             </p>
             <input
               className="w-2/3 h-8 pl-2 mb-4 rounded-md text-black"

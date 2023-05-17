@@ -16,7 +16,6 @@ contract ManufacturerRegistry {
         uint256 duration;
         uint256 estimatedRevenue;
         uint256 creationDate;
-        uint256 endDate;
         address creator;
     }
 
@@ -47,7 +46,6 @@ contract ManufacturerRegistry {
         uint256 duration,
         uint256 estimatedRevenue,
         uint256 createdDate,
-        uint256 endDate,
         address creator
     );
     event AdvertisementRetrieved(
@@ -111,8 +109,7 @@ contract ManufacturerRegistry {
     function createAdvertisement(
         string calldata productName,
         uint256 area,
-        uint256 estimatedRevenue,
-        uint256 endDate
+        uint256 estimatedRevenue
     ) external returns (uint256) {
         require(bytes(productName).length > 0, "Product name is required");
 
@@ -129,8 +126,8 @@ contract ManufacturerRegistry {
         advertisement.area = area;
         advertisement.estimatedRevenue = estimatedRevenue;
         advertisement.duration = block.timestamp + 1 minutes;
-        advertisement.endDate = endDate;
         advertisement.creator = msg.sender;
+        advertisement.id = advertisementId;
 
         emit AdvertisementCreated(
             msg.sender,
@@ -140,7 +137,6 @@ contract ManufacturerRegistry {
             advertisement.duration,
             estimatedRevenue,
             block.timestamp,
-            endDate,
             msg.sender
         );
 
@@ -153,7 +149,7 @@ contract ManufacturerRegistry {
     )
         external
         view
-        returns (string memory, uint256, uint256, uint256, uint256, address)
+        returns (string memory, uint256, uint256, uint256, address)
     {
         require(
             _advertisementId > 0 && _advertisementId <= advertisementId,
@@ -167,7 +163,6 @@ contract ManufacturerRegistry {
             advertisement.area,
             advertisement.duration,
             advertisement.estimatedRevenue,
-            advertisement.endDate,
             advertisement.creator
         );
     }

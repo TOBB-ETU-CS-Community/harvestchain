@@ -1,7 +1,7 @@
 export const GROWER_CONTRACT_ADDRESS =
-  "0xA4d0bA6B82d5b0fA820d5Ca05Ac9777515311Ef5";
+  "0x232beDA0eC4C6AB70c9Fd68Af271a5B9E227E7E4";
 export const INVESTOR_CONTRACT_ADDRESS =
-  "0x9e048088607a7DA88249b2E3db43D371B3f393fd";
+  "0xbBDDE1E1D37A8c6260c29940cEdc112e945D094D";
 export const GROWER_CONTRACT_ABI = [
   {
     anonymous: false,
@@ -47,6 +47,12 @@ export const GROWER_CONTRACT_ABI = [
         internalType: "uint256",
         name: "createdDate",
         type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "creator",
+        type: "address",
       },
     ],
     name: "AdvertisementCreated",
@@ -270,6 +276,11 @@ export const GROWER_CONTRACT_ABI = [
         name: "creationDate",
         type: "uint256",
       },
+      {
+        internalType: "address",
+        name: "creator",
+        type: "address",
+      },
     ],
     stateMutability: "view",
     type: "function",
@@ -364,9 +375,9 @@ export const GROWER_CONTRACT_ABI = [
         type: "uint256",
       },
       {
-        internalType: "uint256",
+        internalType: "address",
         name: "",
-        type: "uint256",
+        type: "address",
       },
     ],
     stateMutability: "view",
@@ -395,7 +406,6 @@ export const GROWER_CONTRACT_ABI = [
     type: "receive",
   },
 ];
-
 export const INVESTOR_CONTRACT_ABI = [
   {
     inputs: [
@@ -435,19 +445,6 @@ export const INVESTOR_CONTRACT_ABI = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "growerContract",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [
       {
         internalType: "address",
@@ -465,11 +462,6 @@ export const INVESTOR_CONTRACT_ABI = [
       {
         internalType: "uint256",
         name: "amount",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "balance",
         type: "uint256",
       },
       {
@@ -492,7 +484,7 @@ export const INVESTOR_CONTRACT_ABI = [
     inputs: [
       {
         internalType: "uint256",
-        name: "amount",
+        name: "_advertisementId",
         type: "uint256",
       },
     ],
@@ -502,7 +494,13 @@ export const INVESTOR_CONTRACT_ABI = [
     type: "function",
   },
   {
-    inputs: [],
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256",
+      },
+    ],
     name: "takePayment",
     outputs: [],
     stateMutability: "payable",
